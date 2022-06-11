@@ -6,6 +6,7 @@ public class AI_AttackShark : MonoBehaviour
 {
     [SerializeField] AnimationCurve sharkAttackCurve;
     [SerializeField] float attackMaxDuration;
+    [SerializeField] float attackRange;
     float attackTime = 0.01f;
     bool attackStarted;
 
@@ -13,15 +14,17 @@ public class AI_AttackShark : MonoBehaviour
 
     Vector2 initialPos;
 
+    GameObject player;
+
     void Awake()
     {
         initialPos = transform.position;
+        player = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (transform.position.x - player.transform.position.x < attackRange)
         {
             attackStarted = true;
         }
@@ -40,6 +43,6 @@ public class AI_AttackShark : MonoBehaviour
 
     void SharkAttack()
     {
-        transform.Translate(initialPos + sharkAttackCurve.Evaluate(attackTime/ attackMaxDuration) * Vector2.up* attackSize);
+        transform.position = new Vector3(transform.position.x, initialPos.y + sharkAttackCurve.Evaluate(attackTime/ attackMaxDuration)* attackSize,0);
     }
 }
