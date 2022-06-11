@@ -34,6 +34,7 @@ public class ai_ShootStar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!player) return;
         if(Vector2.Distance(player.transform.position,transform.position)< distanceBeforeShoot && !isOnFire)
         {
             isShooting = true;

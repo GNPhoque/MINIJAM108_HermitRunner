@@ -24,6 +24,7 @@ public class AI_AttackShark : MonoBehaviour
 
     void Update()
     {
+        if (!player) return;
         if (transform.position.x - player.transform.position.x < attackRange)
         {
             attackStarted = true;

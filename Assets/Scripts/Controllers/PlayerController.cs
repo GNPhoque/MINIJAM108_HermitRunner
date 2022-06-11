@@ -55,6 +55,11 @@ public class PlayerController : CharacterController
 		inputs.Crab.Disable();
 	}
 
+	private void OnDestroy()
+	{
+		GameManager.instance.LoseGame();
+	}
+
 	private void Update()
 	{
 		CheckCollisions(mask);
