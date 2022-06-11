@@ -10,11 +10,21 @@ public abstract class CharacterController : MonoBehaviour
 	[SerializeField]
 	protected LayerMask mask;
 
+	protected Animator animator;
 	protected bool isDigging;
 	protected bool isDefending;
-	protected bool hasShell;
+	private bool hasShell;
 
-	public void CheckCollisions(LayerMask mask)
+	protected bool HasShell { get => hasShell; set { hasShell = value; animator.SetBool("HasShell", value); } }
+
+	void OnDrawGizmosSelected()
+	{
+		// Draw a yellow sphere at the transform's position
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawSphere(transform.position, colliderRadius);
+	}
+
+	public virtual void CheckCollisions(LayerMask mask)
 	{
 		Debug.DrawLine(transform.position, transform.position + Vector3.right * colliderRadius,Color.red);
 		Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, colliderRadius, mask);
@@ -33,17 +43,8 @@ public abstract class CharacterController : MonoBehaviour
 
 	public void TakeDamage()
 	{
-		if (isDigging)
+		if (isDigging || HasShell || isDefending)
 		{
-			return;
-		}
-		if (hasShell)
-		{
-			if (isDefending)
-			{
-				return;
-			}
-			hasShell = false;
 			return;
 		}
 		Destroy(gameObject);

@@ -35,4 +35,10 @@ public class GameManager : MonoBehaviour
 		ScrollSpeed = speed;
 		StaticHelper.scrollSpeed = ScrollSpeed;
 	}
+
+	public void LoseGame()
+	{
+		Time.timeScale = 0f;
+		Debug.Log("GAME OVER");
+	}
 }

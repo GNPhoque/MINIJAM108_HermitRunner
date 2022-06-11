@@ -8,6 +8,8 @@ public class PlayerController : CharacterController
 {
 	[SerializeField]
 	float defenseDuration;
+	[SerializeField]
+	float shellDuration;
 
 	PlayerControls inputs;
 	PlayerMovement movement;
@@ -16,10 +18,12 @@ public class PlayerController : CharacterController
 	PolygonCollider2D polyCollider;
 	Vector3 oldPosition;
 	Vector3 oldMousePosition;
+	Coroutine shellCoroutine;
 
 	#region MONOBEHAVIOUR
 	private void Awake()
 	{
+		animator = GetComponentInChildren<Animator>();
 		inputs = new PlayerControls();
 		movement = GetComponent<PlayerMovement>();
 
@@ -48,13 +52,6 @@ public class PlayerController : CharacterController
 		inputs.Crab.Roll.performed -= Roll_performed;
 		inputs.Crab.Shoot.performed -= Shoot_performed;
 		inputs.Crab.Disable();
-	}
-
-	void OnDrawGizmosSelected()
-	{
-		// Draw a yellow sphere at the transform's position
-		Gizmos.color = Color.yellow;
-		Gizmos.DrawSphere(transform.position, colliderRadius);
 	}
 
 	private void Update()
@@ -177,5 +174,21 @@ public class PlayerController : CharacterController
 		yield return new WaitForSeconds(defenseDuration);
 		GameManager.instance.UpdateScrollSpeed(oldSpeed);
 		isDefending = false;
+	}
+
+	public void EquipShell()
+	{
+		if (HasShell)
+		{
+			StopCoroutine(shellCoroutine);
+		}
+		HasShell = true;
+		shellCoroutine = StartCoroutine(StopShell());
+	}
+
+	IEnumerator StopShell()
+	{
+		yield return new WaitForSeconds(shellDuration);
+		HasShell = false;
 	}
 }
