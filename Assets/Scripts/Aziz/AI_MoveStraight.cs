@@ -19,6 +19,7 @@ public class AI_MoveStraight : MonoBehaviour
 
     private void Update()
     {
+        //
         if (Input.GetKeyDown(KeyCode.Space))
         {
             actionStarted = true;
