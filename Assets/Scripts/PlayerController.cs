@@ -6,11 +6,15 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerController : MonoBehaviour
 {
+	[SerializeField]
+	float defenseDuration;
+
 	PlayerControls inputs;
 	PlayerMovement movement;
 	GameObject lazer;
 	LineRenderer line;
 	MeshCollider meshCollider;
+	bool isDefending;
 
 	private void Awake()
 	{
@@ -51,6 +55,7 @@ public class PlayerController : MonoBehaviour
 	private void Roll_performed(InputAction.CallbackContext obj)
 	{
 		Debug.Log("ROLL");
+		movement.Roll();
 	}
 
 	private void Move_performed(InputAction.CallbackContext obj)
@@ -66,7 +71,12 @@ public class PlayerController : MonoBehaviour
 
 	private void Defense_performed(InputAction.CallbackContext obj)
 	{
+		if (isDefending) return;
 		Debug.Log("DEFENSE");
+		float oldSpeed = GameManager.instance.ScrollSpeed;
+		GameManager.instance.UpdateScrollSpeed(0f);
+		isDefending = true;
+		StartCoroutine(StopDefense(oldSpeed));
 	}
 
 	#region LAZER
@@ -105,4 +115,11 @@ public class PlayerController : MonoBehaviour
 		lazer.SetActive(false);
 	} 
 	#endregion
+
+	IEnumerator StopDefense(float oldSpeed)
+	{
+		yield return new WaitForSeconds(defenseDuration);
+		GameManager.instance.UpdateScrollSpeed(oldSpeed);
+		isDefending = false;
+	}
 }
