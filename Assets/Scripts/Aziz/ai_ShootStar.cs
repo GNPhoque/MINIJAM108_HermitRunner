@@ -65,7 +65,7 @@ public class ai_ShootStar : MonoBehaviour
 
             Vector2 spawnPos = (Vector2)transform.position + (Vector2)(Quaternion.Euler(0, 0, spawnAngle) * Vector2.right);
 
-            Instantiate(spike, spawnPos, Quaternion.Euler(0,0, spawnAngle));
+            Instantiate(spike, spawnPos, Quaternion.Euler(0,0, spawnAngle), transform);
         }
     }
 }

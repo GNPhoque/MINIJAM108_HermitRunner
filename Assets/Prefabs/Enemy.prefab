@@ -9,13 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4715674511069028860}
-  m_Layer: 0
+  - component: {fileID: 697606889507709814}
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4715674511069028860
 Transform:
   m_ObjectHideFlags: 0
@@ -33,6 +34,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &697606889507709814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719468213937072687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12c24d3c60ea5e74e98722128792f41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderRadius: 0
+  mask:
+    serializedVersion: 2
+    m_Bits: 960
 --- !u!1 &2972764138593771565
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,8 +60,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2997546419029182285}
   - component: {fileID: 4400145686487698743}
-  - component: {fileID: 4147295325021081484}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,22 +108,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4147295325021081484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2972764138593771565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c24d3c60ea5e74e98722128792f41c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderRadius: 0
-  mask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &5022468818134947916
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7121478617905030005}
   - component: {fileID: 76316101076267971}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Graphism
   m_TagString: Untagged
   m_Icon: {fileID: 0}

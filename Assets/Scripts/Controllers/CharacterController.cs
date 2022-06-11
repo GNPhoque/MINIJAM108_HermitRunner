@@ -16,12 +16,18 @@ public abstract class CharacterController : MonoBehaviour
 
 	public void CheckCollisions(LayerMask mask)
 	{
+		Debug.DrawLine(transform.position, transform.position + Vector3.right * colliderRadius,Color.red);
 		Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, colliderRadius, mask);
-		CharacterController controller = col.FirstOrDefault(x => x.gameObject != gameObject)?.GetComponent<CharacterController>();
-		if (controller)
+		Collider2D collided = col.FirstOrDefault(x => x.gameObject != gameObject);
+		if (collided)
 		{
+			CharacterController controller = collided?.GetComponent<CharacterController>();
+			Debug.Log($"Damaged {name}, layer {gameObject.layer} from {(collided.name=="Player"?collided.name:collided.transform.parent.name)}");
 			TakeDamage();
-			controller.TakeDamage(gameObject.layer);
+			if (controller)
+			{
+				controller.TakeDamage(gameObject.layer);
+			} 
 		}
 	}
 

@@ -13,7 +13,9 @@ public class PlayerController : CharacterController
 	PlayerMovement movement;
 	GameObject lazer;
 	LineRenderer line;
-	MeshCollider meshCollider;
+	PolygonCollider2D polyCollider;
+	Vector3 oldPosition;
+	Vector3 oldMousePosition;
 
 	#region MONOBEHAVIOUR
 	private void Awake()
@@ -23,7 +25,8 @@ public class PlayerController : CharacterController
 
 		lazer = transform.GetChild(0).gameObject;
 		line = lazer.GetComponent<LineRenderer>();
-		meshCollider = lazer.AddComponent<MeshCollider>();
+		//meshCollider = lazer.AddComponent<MeshCollider>();
+		polyCollider = lazer.AddComponent<PolygonCollider2D>();
 	}
 
 	private void OnEnable()
@@ -50,6 +53,14 @@ public class PlayerController : CharacterController
 	private void Update()
 	{
 		CheckCollisions(mask);
+		if (lazer.activeSelf)
+		{
+			Vector3 positionDifference = transform.position - oldPosition;
+			Vector3 newMousePosition = oldMousePosition + positionDifference;
+			line.SetPositions(new Vector3[] { transform.position, newMousePosition });
+			oldMousePosition = newMousePosition;
+			oldPosition = transform.position;
+		}
 	}
 	#endregion
 
@@ -61,25 +72,25 @@ public class PlayerController : CharacterController
 
 	private void Roll_performed(InputAction.CallbackContext obj)
 	{
-		Debug.Log("ROLL");
+		//Debug.Log("ROLL");
 		movement.Roll();
 	}
 
 	private void Move_performed(InputAction.CallbackContext obj)
 	{
-		Debug.Log("MOVE " + obj.ReadValue<Vector2>());
+		//Debug.Log("MOVE " + obj.ReadValue<Vector2>());
 		movement.UpdateMovementInput(obj.ReadValue<Vector2>());
 	}
 
 	private void Dig_performed(InputAction.CallbackContext obj)
 	{
-		Debug.Log("DIG");
+		//Debug.Log("DIG");
 	}
 
 	private void Defense_performed(InputAction.CallbackContext obj)
 	{
 		if (isDefending) return;
-		Debug.Log("DEFENSE");
+		//Debug.Log("DEFENSE");
 		float oldSpeed = GameManager.instance.ScrollSpeed;
 		GameManager.instance.UpdateScrollSpeed(0f);
 		isDefending = true;
@@ -91,7 +102,7 @@ public class PlayerController : CharacterController
 	private void ShootLazer()
 	{
 		Vector3 mousePosition = GetMousePosition();
-		Debug.Log("SHOOT at " + mousePosition);
+		//Debug.Log("SHOOT at " + mousePosition);
 		ShowLazer(mousePosition);
 		RefreshLazerCollider();
 		StartCoroutine(StopLazer());
@@ -107,21 +118,51 @@ public class PlayerController : CharacterController
 	private void ShowLazer(Vector3 mousePosition)
 	{
 		line.SetPositions(new Vector3[] { transform.position, mousePosition });
+		oldPosition = transform.position;
+		oldMousePosition = mousePosition;
 		lazer.SetActive(true);
 	}
 
 	private void RefreshLazerCollider()
 	{
-		Mesh mesh = new Mesh();
-		line.BakeMesh(mesh, true);
-		meshCollider.sharedMesh = mesh;
+		//Mesh mesh = new Mesh();
+		//line.BakeMesh(mesh, true);
+		//meshCollider.sharedMesh = mesh;
+		polyCollider.SetPath(0, CalculateColliderPoints().ConvertAll(x => (Vector2)transform.InverseTransformPoint(x)));
 	}
 
 	IEnumerator StopLazer()
 	{
 		yield return new WaitForSeconds(1f);
 		lazer.SetActive(false);
-	} 
+	}
+
+	private List<Vector2> CalculateColliderPoints()
+	{
+		Vector3[] positions = new Vector3[line.positionCount];
+		line.GetPositions(positions);
+		//Get The Width of the Line
+		float width = line.startWidth;
+
+		// m = (y2 - y1) / (x2 - x1)
+		float m = (positions[1].y - positions[0].y) / (positions[1].x - positions[0].x);
+		float deltaX = (width / 2f) * (m / Mathf.Pow(m * m + 1, 0.5f));
+		float deltaY = (width / 2f) * (1 / Mathf.Pow(1 + m * m, 0.5f));
+
+		//Calculate Vertex Offset from Line Point
+		Vector3[] offsets = new Vector3[2];
+		offsets[0] = new Vector2(-deltaX, deltaY);
+		offsets[1] = new Vector2(deltaX, -deltaY);
+
+		List<Vector2> colliderPoints = new List<Vector2> {
+			positions[0] + offsets[0],
+			positions[1] + offsets[0],
+			positions[1] + offsets[1],
+			positions[0] + offsets[1]
+		};
+
+		return colliderPoints;
+	}
 	#endregion
 
 	IEnumerator StopDefense(float oldSpeed)
