@@ -19,6 +19,7 @@ public class PlayerController : CharacterController
 	Vector3 oldPosition;
 	Vector3 oldMousePosition;
 	Coroutine shellCoroutine;
+	bool lazerReady = true;
 
 	#region MONOBEHAVIOUR
 	private void Awake()
@@ -105,6 +106,7 @@ public class PlayerController : CharacterController
 	#region LAZER
 	private void ShootLazer()
 	{
+		if (!lazerReady) return;
 		Vector3 mousePosition = GetMousePosition();
 		//Debug.Log("SHOOT at " + mousePosition);
 		ShowLazer(mousePosition);
@@ -125,6 +127,7 @@ public class PlayerController : CharacterController
 		oldPosition = transform.position;
 		oldMousePosition = mousePosition;
 		lazer.SetActive(true);
+		lazerReady = false;
 	}
 
 	private void RefreshLazerCollider()
@@ -139,6 +142,8 @@ public class PlayerController : CharacterController
 	{
 		yield return new WaitForSeconds(1f);
 		lazer.SetActive(false);
+		yield return new WaitForSeconds(9f);
+		lazerReady = true;
 	}
 
 	private List<Vector2> CalculateColliderPoints()

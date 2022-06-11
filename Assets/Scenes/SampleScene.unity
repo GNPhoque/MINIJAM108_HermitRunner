@@ -903,7 +903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7124904883636057724, guid: 77358e33c55efc44a859e22984321477, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.2
+      value: 22.23
       objectReference: {fileID: 0}
     - target: {fileID: 7124904883636057724, guid: 77358e33c55efc44a859e22984321477, type: 3}
       propertyPath: m_LocalPosition.y
@@ -949,6 +949,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1329719263, guid: 47e4b841cba7cce48a7c809865b4f14a, type: 3}
+    - target: {fileID: 8036244268008269203, guid: 77358e33c55efc44a859e22984321477, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 27.84375
+      objectReference: {fileID: 0}
+    - target: {fileID: 8036244268008269203, guid: 77358e33c55efc44a859e22984321477, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 13.34375
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77358e33c55efc44a859e22984321477, type: 3}
 --- !u!1 &1193723725
@@ -1720,6 +1728,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7733414100465662058, guid: 58e07c98234e16d409ec060f982004c6, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733414100465662058, guid: 58e07c98234e16d409ec060f982004c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7733414100591076036, guid: 58e07c98234e16d409ec060f982004c6, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1759,3 +1775,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 319396413677656624, guid: 58e07c98234e16d409ec060f982004c6, type: 3}
   m_PrefabInstance: {fileID: 7733414100643514173}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &7733414100643514179
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7733414100643514174}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

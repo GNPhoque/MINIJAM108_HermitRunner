@@ -152,6 +152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7017730608010143609}
   - component: {fileID: 2311063721804727963}
+  - component: {fileID: -7484876166953140026}
   m_Layer: 8
   m_Name: Requin
   m_TagString: Untagged
@@ -252,6 +253,22 @@ MonoBehaviour:
   attackMaxDuration: 4
   attackRange: 15
   attackSize: 8
+--- !u!114 &-7484876166953140026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021524690638335146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b024edc1522746b4b847a0c12704a643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderRadius: 0
+  mask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &7323390597159345865
 GameObject:
   m_ObjectHideFlags: 0
