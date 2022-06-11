@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
 		lazer = transform.GetChild(0).gameObject;
 		line = lazer.GetComponent<LineRenderer>();
-		meshCollider = lazer.GetComponent<MeshCollider>();
+		meshCollider = lazer.AddComponent<MeshCollider>();
 	}
 
 	private void OnEnable()
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
 	private void ShowLazer(Vector3 mousePosition)
 	{
 		line.SetPositions(new Vector3[] { transform.position, mousePosition });
-		line.enabled = true;
+		lazer.SetActive(true);
 	}
 
 	private void RefreshLazerCollider()
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 	IEnumerator StopLazer()
 	{
 		yield return new WaitForSeconds(1f);
-		line.enabled = false;
+		lazer.SetActive(false);
 	} 
 	#endregion
 }
