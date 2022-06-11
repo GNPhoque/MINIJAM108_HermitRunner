@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		instance = this;
+		StaticHelper.nextBackgroundPosition = transform;
 		UpdateScrollSpeed();
 	}
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovement))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : CharacterController
 {
 	[SerializeField]
 	float defenseDuration;
@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
 	GameObject lazer;
 	LineRenderer line;
 	MeshCollider meshCollider;
-	bool isDefending;
 
+	#region MONOBEHAVIOUR
 	private void Awake()
 	{
 		inputs = new PlayerControls();
@@ -47,6 +47,13 @@ public class PlayerController : MonoBehaviour
 		inputs.Crab.Disable();
 	}
 
+	private void Update()
+	{
+		CheckCollisions(mask);
+	}
+	#endregion
+
+	#region INPUTS
 	private void Shoot_performed(InputAction.CallbackContext obj)
 	{
 		ShootLazer();
@@ -60,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Move_performed(InputAction.CallbackContext obj)
 	{
-		Debug.Log("MOVE "+obj.ReadValue<Vector2>());
+		Debug.Log("MOVE " + obj.ReadValue<Vector2>());
 		movement.UpdateMovementInput(obj.ReadValue<Vector2>());
 	}
 
@@ -77,7 +84,8 @@ public class PlayerController : MonoBehaviour
 		GameManager.instance.UpdateScrollSpeed(0f);
 		isDefending = true;
 		StartCoroutine(StopDefense(oldSpeed));
-	}
+	} 
+	#endregion
 
 	#region LAZER
 	private void ShootLazer()
