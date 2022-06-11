@@ -20,7 +20,6 @@ public class BackgroundScroller : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		Debug.Log("TRIGGER ENTER");
 		if (collision.CompareTag("Player"))
 		{
 			transform.position = StaticHelper.nextBackgroundPosition.position;

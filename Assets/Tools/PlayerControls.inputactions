@@ -79,13 +79,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "New action",
-                    "type": "Button",
+                    "name": "MousePosition",
+                    "type": "Value",
                     "id": "adff79a6-04d9-4041-847c-ef825f2aaada",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -279,11 +279,11 @@
                 {
                     "name": "",
                     "id": "9f398bc4-144d-4d61-b021-b82d40c3c0df",
-                    "path": "",
+                    "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
