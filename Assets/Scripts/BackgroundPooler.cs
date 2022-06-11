@@ -38,6 +38,7 @@ public class BackgroundPooler : MonoBehaviour
 	{
 		GameObject newBackground = Instantiate(backgroundPrefab, nextBackgroundPosition.position, Quaternion.identity, transform);
 		nextBackgroundPosition = newBackground.transform.GetChild(0).transform;
+		StaticHelper.nextBackgroundPosition = nextBackgroundPosition;
 		backgrounds.Add(newBackground);
 	}
 

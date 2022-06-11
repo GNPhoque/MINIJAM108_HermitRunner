@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BackgroundScroller : MonoBehaviour
 {
+	[SerializeField]
+	Transform nextBackgroundPosition;
 	new Transform transform;
 
 	private void Start()
@@ -18,9 +20,11 @@ public class BackgroundScroller : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		Debug.Log("TRIGGER ENTER");
 		if (collision.CompareTag("Player"))
 		{
 			transform.position = StaticHelper.nextBackgroundPosition.position;
+			StaticHelper.nextBackgroundPosition = nextBackgroundPosition;
 		}
 	}
 }

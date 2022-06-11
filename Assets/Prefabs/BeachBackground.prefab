@@ -100,7 +100,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.18966, y: 0}
+  m_Offset: {x: 20, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0209caf1f97c50b439a79ee4240ab105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextBackgroundPosition: {fileID: 5342810446084855051}
 --- !u!1 &7629084421978238278
 GameObject:
   m_ObjectHideFlags: 0
