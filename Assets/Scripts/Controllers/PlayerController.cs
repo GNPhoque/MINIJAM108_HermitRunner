@@ -50,6 +50,13 @@ public class PlayerController : CharacterController
 		inputs.Crab.Disable();
 	}
 
+	void OnDrawGizmosSelected()
+	{
+		// Draw a yellow sphere at the transform's position
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawSphere(transform.position, colliderRadius);
+	}
+
 	private void Update()
 	{
 		CheckCollisions(mask);

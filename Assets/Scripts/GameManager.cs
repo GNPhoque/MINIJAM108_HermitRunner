@@ -9,7 +9,13 @@ public class GameManager : MonoBehaviour
 
 	public static GameManager instance;
 
-	public float ScrollSpeed { get => scrollSpeed; set => scrollSpeed = value; }
+	public float ScrollSpeed { get => scrollSpeed; set { scrollSpeed = value; UpdateScrollSpeed(); } }
+
+	private void OnValidate()
+	{
+		ScrollSpeed = scrollSpeed;
+		UpdateScrollSpeed();
+	}
 
 	private void Start()
 	{
