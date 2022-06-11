@@ -7,8 +7,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float moveSpeed;
 
+    Vector2 movementInput;
+
     void Update()
     {
-        transform.position += Vector3.up * Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
+        transform.position += (Vector3)movementInput * Time.deltaTime * moveSpeed;
     }
+
+    public void UpdateMovementInput(Vector2 input)
+	{
+        movementInput = input;
+	}
 }

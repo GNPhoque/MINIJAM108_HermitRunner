@@ -25,13 +25,6 @@ public class BackgroundPooler : MonoBehaviour
 		AddNewBackground();
 		AddNewBackground();
 		AddNewBackground();
-
-		//StartCoroutine(CreateAndDestroyBackgrounds());
-	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Space)) AddNewBackground();
 	}
 
 	void AddNewBackground()
@@ -40,26 +33,5 @@ public class BackgroundPooler : MonoBehaviour
 		nextBackgroundPosition = newBackground.transform.GetChild(0).transform;
 		StaticHelper.nextBackgroundPosition = nextBackgroundPosition;
 		backgrounds.Add(newBackground);
-	}
-
-	void DestroyFirstBackground()
-	{
-		Destroy(backgrounds[0]);
-		backgrounds.RemoveAt(0);
-	}
-
-	IEnumerator CreateAndDestroyBackgrounds()
-	{
-		while (true)
-		{
-			yield return new WaitForSeconds(backgroundRefreshRatio * scrollSpeed);
-			AddNewBackground();
-			DestroyFirstBackground();
-		}
-	}
-
-	void CycleBackgrounds()
-	{
-
 	}
 }
