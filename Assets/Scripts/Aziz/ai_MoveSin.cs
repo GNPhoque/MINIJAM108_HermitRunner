@@ -11,7 +11,6 @@ public class ai_MoveSin : MonoBehaviour
     bool  isInverted;
     Transform _parentTransform;
 
-    // Start is called before the first frame update
     void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();

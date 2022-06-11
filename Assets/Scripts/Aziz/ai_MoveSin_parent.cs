@@ -20,5 +20,6 @@ public class ai_MoveSin_parent : MonoBehaviour
 
     void Update()
     {
+
     }
 }

@@ -19,7 +19,7 @@ public class ai_ShootStar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time > 3)
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             ShootStarSpikes();
         }
