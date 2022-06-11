@@ -15,10 +15,10 @@ public class ai_MoveSin_parent : MonoBehaviour
     {
         Amplitude = Random.Range(1, 4);
         Frequency = Random.Range(1, 3);
+        IsInverted = _isInverted;
     }
 
     void Update()
     {
-        IsInverted = _isInverted;
     }
 }
