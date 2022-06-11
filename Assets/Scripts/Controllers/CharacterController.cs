@@ -15,7 +15,7 @@ public abstract class CharacterController : MonoBehaviour
 	protected bool isDefending;
 	private bool hasShell;
 
-	protected bool HasShell { get => hasShell; set { hasShell = value; animator.SetBool("HasShell", value); } }
+	public bool HasShell { get => hasShell; set { hasShell = value; animator.SetBool("HasShell", value); } }
 
 	void OnDrawGizmosSelected()
 	{

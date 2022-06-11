@@ -8,9 +8,11 @@ public class ShellBar : MonoBehaviour
 
     [SerializeField] GameObject player;
     [SerializeField] Image mask;
-    int barDurationLeft;
-    int initialBarDuration;
+    [SerializeField] Image fill;
+    float barDurationLeft;
+    float initialBarDuration;
     float currentFill;
+    bool hasShell;
 
     void Awake()
     {
@@ -19,8 +21,15 @@ public class ShellBar : MonoBehaviour
 
     void Update()
     {
-        //barDurationLeft = player.GetComponent<Script>().data;
-        //initialBarDuration = player.GetComponent<Script>().data;
+        Debug.Log("Has Shell : " + hasShell);
+        Debug.Log("Bar Duration : " + mask.fillAmount);
+        initialBarDuration = player.GetComponent<PlayerController>().shellDuration;
+        hasShell = player.GetComponent<PlayerController>().HasShell;
+
+        if(hasShell)
+        {
+            barDurationLeft -= Time.deltaTime;
+        }
 
         if (initialBarDuration != 0)
         {
@@ -28,17 +37,23 @@ public class ShellBar : MonoBehaviour
             mask.fillAmount = currentFill;
         }
 
-        if(currentFill < 0.25)
+        if(currentFill < 0.25f)
         {
-            mask.color = Color.red;
+            fill.color = Color.red;
         }
-        else if(currentFill <0.5)
+        else if(currentFill <0.5f)
         {
-            mask.color = new Vector4(255, 165, 0, 1);
+            fill.color = new Vector4(255, 165, 0, 1);
         }
         else
         {
-            mask.color = Color.cyan;
+            fill.color = Color.cyan;
+        }
+
+        if(!hasShell)
+        {
+            fill.color = Color.black;
+            barDurationLeft = initialBarDuration;
         }
     }
 }

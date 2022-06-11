@@ -9,7 +9,7 @@ public class PlayerController : CharacterController
 	[SerializeField]
 	float defenseDuration;
 	[SerializeField]
-	float shellDuration;
+	public float shellDuration;
 
 	PlayerControls inputs;
 	PlayerMovement movement;
