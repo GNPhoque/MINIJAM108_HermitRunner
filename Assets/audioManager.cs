@@ -7,6 +7,17 @@ public class audioManager : MonoBehaviour
 {
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] AudioClip themeMusic;
+    [SerializeField] AudioClip walkingStep;
+    [SerializeField] AudioClip[] ursinFiring;
+    [SerializeField] AudioClip beachEnvironment;
+    [SerializeField] AudioClip sharkDies;
+    [SerializeField] AudioClip[] sharkAttack;
+    [SerializeField] AudioClip[] scoreItem;
+    [SerializeField] AudioClip[] pickupShell;
+    [SerializeField] AudioClip laserBeam;
+    [SerializeField] AudioClip onLoss;
+
+
     float musicVolume;
     
 

@@ -310,6 +310,34 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MainMenu"",
+            ""id"": ""79ded931-f6c8-461e-80a3-457cd44e33ad"",
+            ""actions"": [
+                {
+                    ""name"": ""Next"",
+                    ""type"": ""Button"",
+                    ""id"": ""f612b14d-513b-440a-9e4e-377247727f26"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""725b2ffc-e8c6-4b0e-990f-6214c8d46b47"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -325,6 +353,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Crab_Shoot = m_Crab.FindAction("Shoot", throwIfNotFound: true);
         m_Crab_Dig = m_Crab.FindAction("Dig", throwIfNotFound: true);
         m_Crab_MousePosition = m_Crab.FindAction("MousePosition", throwIfNotFound: true);
+        // MainMenu
+        m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
+        m_MainMenu_Next = m_MainMenu.FindAction("Next", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -486,6 +517,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public CrabActions @Crab => new CrabActions(this);
+
+    // MainMenu
+    private readonly InputActionMap m_MainMenu;
+    private IMainMenuActions m_MainMenuActionsCallbackInterface;
+    private readonly InputAction m_MainMenu_Next;
+    public struct MainMenuActions
+    {
+        private @PlayerControls m_Wrapper;
+        public MainMenuActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Next => m_Wrapper.m_MainMenu_Next;
+        public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MainMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMainMenuActions instance)
+        {
+            if (m_Wrapper.m_MainMenuActionsCallbackInterface != null)
+            {
+                @Next.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnNext;
+                @Next.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnNext;
+                @Next.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnNext;
+            }
+            m_Wrapper.m_MainMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Next.started += instance.OnNext;
+                @Next.performed += instance.OnNext;
+                @Next.canceled += instance.OnNext;
+            }
+        }
+    }
+    public MainMenuActions @MainMenu => new MainMenuActions(this);
     public interface IUIActions
     {
         void OnNewaction(InputAction.CallbackContext context);
@@ -498,5 +562,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnDig(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+    }
+    public interface IMainMenuActions
+    {
+        void OnNext(InputAction.CallbackContext context);
     }
 }
