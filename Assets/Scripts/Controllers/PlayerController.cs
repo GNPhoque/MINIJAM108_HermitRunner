@@ -12,6 +12,8 @@ public class PlayerController : CharacterController
 	[SerializeField]
 	public float shellDuration;
 	[SerializeField]
+	public float lazerLength;
+	[SerializeField]
 	Vector2 noShellColliderOffset;
 	[SerializeField]
 	Vector2 noShellColliderSize;
@@ -89,10 +91,10 @@ public class PlayerController : CharacterController
 		CheckCollisions(mask);
 		if (lazer.activeSelf)
 		{
-			Vector3 positionDifference = transform.position - oldPosition;
-			Vector3 newMousePosition = oldMousePosition + positionDifference;
-			line.SetPositions(new Vector3[] { transform.position, newMousePosition });
-			oldMousePosition = newMousePosition;
+			Vector3 pos = (GetMousePosition() - transform.position).normalized;
+			pos = pos * lazerLength;
+			line.SetPositions(new Vector3[] { transform.position, transform.position+pos});
+			RefreshLazerCollider();
 			oldPosition = transform.position;
 		}
 	}
@@ -113,7 +115,11 @@ public class PlayerController : CharacterController
 	private void Move_performed(InputAction.CallbackContext obj)
 	{
 		//Debug.Log("MOVE " + obj.ReadValue<Vector2>());
-		if (isDefending || shootingLazer) return;
+		if (isDefending || shootingLazer)
+		{
+			movement.UpdateMovementInput(obj.ReadValue<Vector2>()); 
+			return;
+		}
 		movement.UpdateMovementInput(obj.ReadValue<Vector2>()); 
 	}
 
@@ -153,9 +159,14 @@ public class PlayerController : CharacterController
 
 	private void ShowLazer(Vector3 mousePosition)
 	{
-		line.SetPositions(new Vector3[] { transform.position, mousePosition });
-		oldPosition = transform.position;
+		Vector3 pos1 = transform.position;
+		Vector3 pos2 = (mousePosition - transform.position).normalized * lazerLength;
+		
+		line.SetPositions(new Vector3[] { pos1, pos1 + pos2 });
+
+		oldPosition = pos1;
 		oldMousePosition = mousePosition;
+		
 		lazer.SetActive(true);
 		CinemachineShake.Instance.ShakeCamera(4,true);
 		shootingLazer = true;
