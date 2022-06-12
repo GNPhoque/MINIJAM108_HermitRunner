@@ -153,6 +153,7 @@ public class PlayerController : CharacterController
 		oldPosition = transform.position;
 		oldMousePosition = mousePosition;
 		lazer.SetActive(true);
+		CinemachineShake.Instance.ShakeCamera(4,true);
 		lazerReady = false;
 	}
 
@@ -168,6 +169,7 @@ public class PlayerController : CharacterController
 	{
 		yield return new WaitForSeconds(1f);
 		lazer.SetActive(false);
+		CinemachineShake.Instance.ShakeCamera(4, false);
 		yield return new WaitForSeconds(9f);
 		lazerReady = true;
 	}

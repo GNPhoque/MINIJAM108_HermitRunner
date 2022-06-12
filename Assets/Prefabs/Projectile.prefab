@@ -50,7 +50,7 @@ MonoBehaviour:
   timeBeforeDestroy: 0
   mask:
     serializedVersion: 2
-    m_Bits: 3008
+    m_Bits: 2496
   collider: {fileID: 2282039512334615429}
 --- !u!1 &4979205667774244775
 GameObject:
