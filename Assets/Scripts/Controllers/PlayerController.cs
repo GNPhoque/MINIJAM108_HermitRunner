@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerMovement))]
 public class PlayerController : CharacterController
 {
+	#region MEMBERS
 	[SerializeField]
 	float defenseDuration;
 	[SerializeField]
@@ -29,6 +30,8 @@ public class PlayerController : CharacterController
 	Vector3 oldMousePosition;
 	Coroutine shellCoroutine;
 	bool lazerReady = true;
+	bool shootingLazer;
+	#endregion
 
 
 	#region MONOBEHAVIOUR
@@ -61,11 +64,6 @@ public class PlayerController : CharacterController
 
 		HasShellChanged += UpdateShellCollider;
 		//OnDeath += PlayerController_OnDeath;
-	}
-
-	private void PlayerController_OnDeath()
-	{
-		animator.SetBool("Death", true);
 	}
 
 	private void OnDisable()
@@ -115,7 +113,8 @@ public class PlayerController : CharacterController
 	private void Move_performed(InputAction.CallbackContext obj)
 	{
 		//Debug.Log("MOVE " + obj.ReadValue<Vector2>());
-		movement.UpdateMovementInput(obj.ReadValue<Vector2>());
+		if (isDefending || shootingLazer) return;
+		movement.UpdateMovementInput(obj.ReadValue<Vector2>()); 
 	}
 
 	private void Dig_performed(InputAction.CallbackContext obj)
@@ -159,6 +158,7 @@ public class PlayerController : CharacterController
 		oldMousePosition = mousePosition;
 		lazer.SetActive(true);
 		CinemachineShake.Instance.ShakeCamera(4,true);
+		shootingLazer = true;
 		lazerReady = false;
 	}
 
@@ -174,6 +174,7 @@ public class PlayerController : CharacterController
 	{
 		yield return new WaitForSeconds(1f);
 		lazer.SetActive(false);
+		shootingLazer = false;
 		CinemachineShake.Instance.ShakeCamera(4, false);
 		yield return new WaitForSeconds(0f);
 		lazerReady = true;
@@ -207,6 +208,7 @@ public class PlayerController : CharacterController
 	}
 	#endregion
 
+	#region DEFENSE
 	void UpdateShellCollider(bool hasShell)
 	{
 		if (hasShell)
@@ -242,5 +244,11 @@ public class PlayerController : CharacterController
 	{
 		yield return new WaitForSeconds(shellDuration);
 		HasShell = false;
+	}
+	#endregion
+
+	private void PlayerController_OnDeath()
+	{
+		animator.SetBool("Death", true);
 	}
 }
