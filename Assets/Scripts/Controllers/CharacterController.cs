@@ -14,6 +14,7 @@ public abstract class CharacterController : MonoBehaviour
 	protected bool isDigging;
 	protected bool isDefending;
 	private bool hasShell;
+	private bool logDamage;
 
 	public bool HasShell { get => hasShell; set { hasShell = value; animator.SetBool("HasShell", value); } }
 
@@ -26,18 +27,22 @@ public abstract class CharacterController : MonoBehaviour
 
 	public virtual void CheckCollisions(LayerMask mask)
 	{
-		Debug.DrawLine(transform.position, transform.position + Vector3.right * colliderRadius,Color.red);
+		logDamage = true;
+		Debug.DrawLine(transform.position, transform.position + Vector3.right * colliderRadius, Color.red);
 		Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, colliderRadius, mask);
 		Collider2D collided = col.FirstOrDefault(x => x.gameObject != gameObject);
 		if (collided)
 		{
 			CharacterController controller = collided?.GetComponent<CharacterController>();
-			Debug.Log($"Damaged {name}, layer {gameObject.layer} from {(collided.name=="Player"?collided.name:collided.transform.parent.name)}");
 			TakeDamage();
+			if (logDamage)
+			{
+				Debug.Log($"Damaged {name}, layer {gameObject.layer} from {(collided.name == "Player" ? collided.name : collided.transform.parent.name)}");
+			}
 			if (controller)
 			{
 				controller.TakeDamage(gameObject.layer);
-			} 
+			}
 		}
 	}
 
@@ -45,7 +50,12 @@ public abstract class CharacterController : MonoBehaviour
 	{
 		if (isDigging || HasShell || isDefending)
 		{
+			logDamage = false;
 			return;
+		}
+		if(this is PlayerController)
+		{
+			//Debug.Break();
 		}
 		Destroy(gameObject);
 	}

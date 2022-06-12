@@ -22,8 +22,6 @@ public class ShellBar : MonoBehaviour
     void Update()
     {
         if (!player) return;
-        Debug.Log("Has Shell : " + hasShell);
-        Debug.Log("Bar Duration : " + mask.fillAmount);
         initialBarDuration = player.GetComponent<PlayerController>().shellDuration;
         hasShell = player.GetComponent<PlayerController>().HasShell;
 

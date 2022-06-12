@@ -5,15 +5,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	[SerializeField]
-	float scrollSpeed;
+	float _scrollSpeed;
 
 	public static GameManager instance;
 
-	public float ScrollSpeed { get => scrollSpeed; set { scrollSpeed = value; UpdateScrollSpeed(); } }
+	public float ScrollSpeed { get => _scrollSpeed; set { _scrollSpeed = value; UpdateScrollSpeed(); } }
 
 	private void OnValidate()
 	{
-		ScrollSpeed = scrollSpeed;
+		ScrollSpeed = _scrollSpeed;
 		UpdateScrollSpeed();
 	}
 
@@ -21,8 +21,16 @@ public class GameManager : MonoBehaviour
 	{
 		instance = this;
 		StaticHelper.nextBackgroundPosition = transform;
+		StaticHelper.score = 0;
 		UpdateScrollSpeed();
+		InvokeRepeating("SpeedUp", 20f, 20f);
 	}
+
+	//private void Update()
+	//{
+	//	Time.timeScale *= 1 + (Time.deltaTime / 100f);
+	//	//ScrollSpeed *= 1 + (Time.deltaTime / 100f);
+	//}
 
 	[ContextMenu("UpdateScrollSpeed")]
 	void UpdateScrollSpeed()
@@ -34,6 +42,11 @@ public class GameManager : MonoBehaviour
 	{
 		ScrollSpeed = speed;
 		StaticHelper.scrollSpeed = ScrollSpeed;
+	}
+
+	void SpeedUp()
+	{
+		Time.timeScale *= 1.05f;
 	}
 
 	public void LoseGame()

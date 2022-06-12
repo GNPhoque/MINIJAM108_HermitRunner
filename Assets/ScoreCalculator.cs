@@ -19,6 +19,7 @@ public class ScoreCalculator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //scoreText.text = "Score" + ToString(player.Score);
+        StaticHelper.score += StaticHelper.scrollSpeed * Time.deltaTime;
+        scoreText.text = $"Score : {StaticHelper.score.ToString("000000")}";
     }
 }
