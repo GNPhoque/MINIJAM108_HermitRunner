@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfSpikes: 8
   numberOfWaves: 1
-  spike: {fileID: 8401095424513246870, guid: f4095e14183d10e4ca1200ec031c213e, type: 3}
+  spike: {fileID: 517651364630071858, guid: 681bbc14814f43743bc73e2d05b435d7, type: 3}
   distanceFromCenter: 0.5
   distanceBeforeShoot: 0
   attackCooldown: 0
@@ -598,7 +598,6 @@ MonoBehaviour:
   arrowParents:
   - {fileID: 226055517}
   - {fileID: 1540735506}
-  - {fileID: 0}
   closeDistance: 35
   veryCloseDistance: 15
   shells:

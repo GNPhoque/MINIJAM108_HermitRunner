@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class arrowsShowingShells : MonoBehaviour
 {
-    [SerializeField] GameObject[] arrowParents = new GameObject[3];
+    [SerializeField] GameObject[] arrowParents;
     float greenColor;
     [SerializeField] float closeDistance;
     [SerializeField] float veryCloseDistance;
@@ -19,7 +19,7 @@ public class arrowsShowingShells : MonoBehaviour
     {
         shells = GameObject.FindObjectsOfType<BonusController>();
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             if(i< shells.Length)
             {
@@ -32,13 +32,13 @@ public class arrowsShowingShells : MonoBehaviour
                     float distance = Vector2.Distance(shells[i].transform.position, transform.position);
                     
                     //marche po
-                    if(distance <closeDistance)
-                    {
-                        arrowParents[i].transform.GetComponentInChildren<SpriteRenderer>().color = new Vector4(255, 165, 0, 1);
-                    }
-                    else if(distance<veryCloseDistance)
+                    if(distance <veryCloseDistance)
                     {
                         arrowParents[i].transform.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+                    }
+                    else if(distance<closeDistance)
+                    {
+                        arrowParents[i].transform.GetComponentInChildren<SpriteRenderer>().color = new Color(1, 0.65f, 0);
                     }
                     else
                     {
