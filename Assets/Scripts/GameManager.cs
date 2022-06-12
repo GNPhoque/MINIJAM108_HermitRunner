@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour
 
 	public static GameManager instance;
 
-	public audioManager audioManager;
+	[HideInInspector] public audioManager audioManager;
 
-	public AudioSource audioSource;
+	[HideInInspector] public AudioSource audioSource;
 
 	public float ScrollSpeed { get => _scrollSpeed; set { _scrollSpeed = value; UpdateScrollSpeed(); } }
 
@@ -78,6 +78,10 @@ public class GameManager : MonoBehaviour
 		losePanel.SetActive(true);
 		if (StaticHelper.score > StaticHelper.highscore) StaticHelper.highscore = StaticHelper.score;
 		gameoverText.text = $"You lose\n\nSCORE : {StaticHelper.score.ToString("00000")}\nHIGHSCORE : {StaticHelper.highscore.ToString("00000")}";
+		
+		AudioClip clip = audioManager.onLoss;
+		audioSource.PlayOneShot(clip);
+
 	}
 
 	public void Restart()

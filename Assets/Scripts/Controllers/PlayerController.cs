@@ -33,6 +33,8 @@ public class PlayerController : CharacterController
 	Coroutine shellCoroutine;
 	bool lazerReady = true;
 	bool shootingLazer;
+	AudioSource myAudio;
+
 	#endregion
 
 
@@ -47,6 +49,7 @@ public class PlayerController : CharacterController
 		lazer = transform.GetChild(0).gameObject;
 		line = lazer.GetComponent<LineRenderer>();
 		polyCollider = lazer.AddComponent<PolygonCollider2D>();
+		myAudio = GetComponentInChildren<AudioSource>();
 	}
 
 	private void Start()
@@ -130,11 +133,13 @@ public class PlayerController : CharacterController
 
 	private void Defense_performed(InputAction.CallbackContext obj)
 	{
+
 		if (isDefending) return;
 		//Debug.Log("DEFENSE");
 		float oldSpeed = GameManager.instance.ScrollSpeed;
 		GameManager.instance.UpdateScrollSpeed(0f);
 		isDefending = true;
+		myAudio.Stop();
 		StartCoroutine(StopDefense(oldSpeed));
 	} 
 	#endregion
@@ -146,6 +151,10 @@ public class PlayerController : CharacterController
 		Vector3 mousePosition = GetMousePosition();
 		//Debug.Log("SHOOT at " + mousePosition);
 		ShowLazer(mousePosition);
+
+		AudioClip clip = GameManager.instance.audioManager.laserBeam;
+		GameManager.instance.audioSource.PlayOneShot(clip);
+
 		RefreshLazerCollider();
 		StartCoroutine(StopLazer());
 	}
@@ -239,6 +248,7 @@ public class PlayerController : CharacterController
 		yield return new WaitForSeconds(defenseDuration);
 		GameManager.instance.UpdateScrollSpeed(oldSpeed);
 		isDefending = false;
+		myAudio.Play();
 	}
 
 	public void EquipShell()

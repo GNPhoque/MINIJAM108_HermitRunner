@@ -31,6 +31,8 @@ public class ObstacleController : CharacterController
 			if (controller)
 			{
 				controller.TakeDamage(gameObject.layer);
+				AudioClip clip = GameManager.instance.audioManager.sharkDies;
+				GameManager.instance.audioSource.PlayOneShot(clip);
 			}
 		}
 	}

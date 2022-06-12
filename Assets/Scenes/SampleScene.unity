@@ -573,12 +573,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413785926}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 877585811}
+  m_Father: {fileID: 729764651}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &413785928
@@ -1028,6 +1028,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711514288}
   m_CullTransparentMesh: 1
+--- !u!1 &729764650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 729764651}
+  m_Layer: 0
+  m_Name: OtherSFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &729764651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729764650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 413785927}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &788305997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,8 +1327,7 @@ Transform:
   m_LocalPosition: {x: -18.2, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 413785927}
+  m_Children: []
   m_Father: {fileID: 1697410037}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1323,7 +1354,6 @@ MonoBehaviour:
   sharkDies: {fileID: 8300000, guid: c9cf22f86a8c57d459d79c7ed15fd08f, type: 3}
   sharkAttack:
   - {fileID: 8300000, guid: 78b0913f02b09934ebc96d8c0158d232, type: 3}
-  - {fileID: 8300000, guid: dabf5a9646b449c4b942d4012c262be9, type: 3}
   - {fileID: 8300000, guid: 95a280b23cac92448be7c2296f31cd06, type: 3}
   scoreItem:
   - {fileID: 8300000, guid: 44e27be211feb9a4eaeb378181c1c415, type: 3}
