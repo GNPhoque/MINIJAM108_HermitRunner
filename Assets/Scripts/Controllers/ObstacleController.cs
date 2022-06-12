@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class ObstacleController : CharacterController
 {
-	new BoxCollider2D collider;
+	new BoxCollider2D boxCollider;
 
 	private void Start()
 	{
-		collider = GetComponentInChildren<BoxCollider2D>();
+		boxCollider = GetComponentInChildren<BoxCollider2D>();
 	}
 
 	private void Update()
@@ -21,7 +21,7 @@ public class ObstacleController : CharacterController
 	{
 		Debug.DrawLine(transform.position, transform.position + Vector3.right * colliderRadius, Color.red);
 		Collider2D[] col = new Collider2D[1];
-		Physics2D.OverlapCollider(collider, new ContactFilter2D() { layerMask = mask, useLayerMask = true }, col);
+		Physics2D.OverlapCollider(boxCollider, new ContactFilter2D() { layerMask = mask, useLayerMask = true }, col);
 		Collider2D collided = col.FirstOrDefault();
 		if (collided)
 		{
