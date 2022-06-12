@@ -10,7 +10,7 @@ public class SpawnerScroller : Scroller
 	protected override void Start()
 	{
 		base.Start();
-		Instantiate(SelectRandomEnemyPreset(), nextBackgroundPosition.position, Quaternion.identity, nextBackgroundPosition);
+		Instantiate(enemies[0], nextBackgroundPosition.position, Quaternion.identity, nextBackgroundPosition);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
