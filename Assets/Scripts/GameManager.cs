@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 	[SerializeField]
 	float _scrollSpeed;
+	[SerializeField]
+	TMPro.TMP_Text gameoverText;
+	[SerializeField]
+	GameObject losePanel;
 
 	public static GameManager instance;
 
@@ -23,7 +28,8 @@ public class GameManager : MonoBehaviour
 		StaticHelper.nextBackgroundPosition = transform;
 		StaticHelper.score = 0;
 		UpdateScrollSpeed();
-		InvokeRepeating("SpeedUp", 20f, 20f);
+		InvokeRepeating("SpeedUp", 10f, 10f);
+		Time.timeScale = 1f;
 	}
 
 	//private void Update()
@@ -47,11 +53,19 @@ public class GameManager : MonoBehaviour
 	void SpeedUp()
 	{
 		Time.timeScale *= 1.05f;
+		Debug.Log($"TimeScale : {Time.timeScale}");
 	}
 
 	public void LoseGame()
 	{
 		Time.timeScale = 0f;
-		Debug.Log("GAME OVER");
+		losePanel.SetActive(true);
+		if (StaticHelper.score > StaticHelper.highscore) StaticHelper.highscore = StaticHelper.score;
+		gameoverText.text = $"You lose\n\nSCORE : {StaticHelper.score.ToString("00000")}\nHIGHSCORE : {StaticHelper.highscore.ToString("00000")}";
+	}
+
+	public void Restart()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 }

@@ -22,8 +22,12 @@ public class BackgroundScroller : MonoBehaviour
 	{
 		if (collision.CompareTag("Player"))
 		{
-			transform.position = StaticHelper.nextBackgroundPosition.position;
-			StaticHelper.nextBackgroundPosition = nextBackgroundPosition;
+			//Debug.Log(transform.position);
+			transform.position = StaticHelper.nextBackgroundPosition.position + Vector3.right * 21.4f;
+			//StaticHelper.nextBackgroundPosition = nextBackgroundPosition;
+			StaticHelper.nextBackgroundPosition = transform;
+			//Debug.Log(transform.position);
+			//Debug.Break();
 		}
 	}
 }

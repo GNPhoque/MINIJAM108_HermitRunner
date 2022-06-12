@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,9 @@ public abstract class CharacterController : MonoBehaviour
 	private bool hasShell;
 	private bool logDamage;
 
-	public bool HasShell { get => hasShell; set { hasShell = value; animator.SetBool("HasShell", value); } }
+	public bool HasShell { get => hasShell; set { hasShell = value; animator.SetBool("HasShell", value); HasShellChanged?.Invoke(value); } }
+
+	public event Action<bool> HasShellChanged;
 
 	void OnDrawGizmosSelected()
 	{

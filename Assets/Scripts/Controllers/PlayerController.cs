@@ -10,27 +10,37 @@ public class PlayerController : CharacterController
 	float defenseDuration;
 	[SerializeField]
 	public float shellDuration;
+	[SerializeField]
+	Vector2 noShellColliderOffset;
+	[SerializeField]
+	Vector2 noShellColliderSize;
+	[SerializeField]
+	Vector2 hasShellColliderOffset;
+	[SerializeField]
+	Vector2 hasShellColliderSize;
 
 	PlayerControls inputs;
 	PlayerMovement movement;
 	GameObject lazer;
 	LineRenderer line;
 	PolygonCollider2D polyCollider;
+	BoxCollider2D boxCollider;
 	Vector3 oldPosition;
 	Vector3 oldMousePosition;
 	Coroutine shellCoroutine;
 	bool lazerReady = true;
+
 
 	#region MONOBEHAVIOUR
 	private void Awake()
 	{
 		animator = GetComponentInChildren<Animator>();
 		inputs = new PlayerControls();
+		boxCollider = GetComponent<BoxCollider2D>();
 		movement = GetComponent<PlayerMovement>();
 
 		lazer = transform.GetChild(0).gameObject;
 		line = lazer.GetComponent<LineRenderer>();
-		//meshCollider = lazer.AddComponent<MeshCollider>();
 		polyCollider = lazer.AddComponent<PolygonCollider2D>();
 	}
 
@@ -43,6 +53,8 @@ public class PlayerController : CharacterController
 		inputs.Crab.Roll.performed += Roll_performed;
 		inputs.Crab.Shoot.performed += Shoot_performed;
 		inputs.Crab.Enable();
+
+		HasShellChanged += UpdateShellCollider;
 	}
 
 	private void OnDisable()
@@ -53,6 +65,8 @@ public class PlayerController : CharacterController
 		inputs.Crab.Roll.performed -= Roll_performed;
 		inputs.Crab.Shoot.performed -= Shoot_performed;
 		inputs.Crab.Disable();
+
+		HasShellChanged -= UpdateShellCollider;
 	}
 
 	private void OnDestroy()
@@ -178,6 +192,20 @@ public class PlayerController : CharacterController
 		return colliderPoints;
 	}
 	#endregion
+
+	void UpdateShellCollider(bool hasShell)
+	{
+		if (hasShell)
+		{
+			boxCollider.offset = noShellColliderOffset;
+			boxCollider.size = noShellColliderSize;
+		}
+		else
+		{
+			boxCollider.offset = hasShellColliderOffset;
+			boxCollider.size = hasShellColliderSize;
+		}
+	}
 
 	IEnumerator StopDefense(float oldSpeed)
 	{

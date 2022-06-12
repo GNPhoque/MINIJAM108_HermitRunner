@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ObstacleController : CharacterController
 {
-	BoxCollider2D collider;
+	new BoxCollider2D collider;
 
 	private void Start()
 	{
