@@ -8,7 +8,7 @@ public class ScoreCalculator : MonoBehaviour
 {
 
     [SerializeField] GameObject player;
-    TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI scoreText;
 
 
     void Awake()

@@ -49,7 +49,7 @@ MonoBehaviour:
   colliderRadius: 0
   mask:
     serializedVersion: 2
-    m_Bits: 960
+    m_Bits: 3008
 --- !u!1 &2972764138593771565
 GameObject:
   m_ObjectHideFlags: 0

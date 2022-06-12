@@ -21,7 +21,7 @@ public class ObstacleController : CharacterController
 	{
 		Debug.DrawLine(transform.position, transform.position + Vector3.right * colliderRadius, Color.red);
 		Collider2D[] col = new Collider2D[1];
-		Physics2D.OverlapCollider(collider,new ContactFilter2D() { layerMask = mask },col);
+		Physics2D.OverlapCollider(collider, new ContactFilter2D() { layerMask = mask, useLayerMask = true }, col);
 		Collider2D collided = col.FirstOrDefault();
 		if (collided)
 		{
