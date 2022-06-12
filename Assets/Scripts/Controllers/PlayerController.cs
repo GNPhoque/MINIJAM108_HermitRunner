@@ -44,6 +44,11 @@ public class PlayerController : CharacterController
 		polyCollider = lazer.AddComponent<PolygonCollider2D>();
 	}
 
+	private void Start()
+	{
+		CinemachineShake.Instance.ShakeCamera(4, false);
+	}
+
 	private void OnEnable()
 	{
 		inputs.Crab.Defense.performed += Defense_performed;
@@ -170,7 +175,7 @@ public class PlayerController : CharacterController
 		yield return new WaitForSeconds(1f);
 		lazer.SetActive(false);
 		CinemachineShake.Instance.ShakeCamera(4, false);
-		yield return new WaitForSeconds(9f);
+		yield return new WaitForSeconds(0f);
 		lazerReady = true;
 	}
 
