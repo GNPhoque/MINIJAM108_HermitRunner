@@ -8,7 +8,6 @@ public class ai_ShootStar : MonoBehaviour
     [SerializeField] int numberOfWaves;
     float spikeSpeed;
     [SerializeField] GameObject spike;
-    [SerializeField] float distanceFromCenter;
     [SerializeField] float distanceBeforeShoot;
     [SerializeField] float attackCooldown;
     float attackcurrentCooldown;
@@ -35,7 +34,7 @@ public class ai_ShootStar : MonoBehaviour
     void Update()
     {
         if (!player) return;
-        if(Vector2.Distance(player.transform.position,transform.position)< distanceBeforeShoot && !isOnFire)
+        if(Vector2.Distance(player.transform.position,transform.position) < distanceBeforeShoot && !isOnFire)
         {
             isShooting = true;
         }
@@ -68,5 +67,11 @@ public class ai_ShootStar : MonoBehaviour
 
             Instantiate(spike, spawnPos, Quaternion.Euler(0,0, spawnAngle), transform);
         }
+
+        /* marche po, je passe 
+        Vector2 playerDirection = player.transform.position - transform.position;
+        float playerDirectionAngle = Vector2.Angle(transform.position, playerDirection);
+        Instantiate(spike, (Vector2)transform.position + (Vector2)(Quaternion.Euler(0, 0, playerDirectionAngle) * Vector2.right), Quaternion.Euler(0, 0, playerDirectionAngle), transform);
+        */
     }
 }

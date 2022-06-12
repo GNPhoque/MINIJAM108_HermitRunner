@@ -130,7 +130,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5555125198307068473}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -31.27, y: 0.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -155,7 +155,7 @@ MonoBehaviour:
   numberOfSpikes: 8
   numberOfWaves: 1
   spike: {fileID: 517651364630071858, guid: 681bbc14814f43743bc73e2d05b435d7, type: 3}
-  distanceFromCenter: 0.2
+  distanceFromCenter: 0.5
   distanceBeforeShoot: 7
   attackCooldown: 2
 --- !u!114 &6337117109661001991
