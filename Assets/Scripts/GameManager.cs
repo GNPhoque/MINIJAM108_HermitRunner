@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
 	TMPro.TMP_Text gameoverText;
 	[SerializeField]
 	GameObject losePanel;
+	[SerializeField]
+	public float playerMaxY;
+	[SerializeField]
+	public float playerMinY;
 
 	public static GameManager instance;
 

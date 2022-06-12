@@ -2028,6 +2028,8 @@ MonoBehaviour:
   _scrollSpeed: 5
   gameoverText: {fileID: 19608838}
   losePanel: {fileID: 1018668961}
+  playerMaxY: 4
+  playerMinY: -3
 --- !u!1 &1712228394
 GameObject:
   m_ObjectHideFlags: 0

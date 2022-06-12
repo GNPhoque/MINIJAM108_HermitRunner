@@ -32,7 +32,9 @@ public class PlayerMovement : MonoBehaviour
 		}
 		else
 		{
-            transform.position += (Vector3)movementInput * Time.deltaTime * moveSpeed;
+			Vector3 nextPos = transform.position + (Vector3)movementInput * Time.deltaTime * moveSpeed;
+			if (nextPos.y < GameManager.instance.playerMaxY && nextPos.y > GameManager.instance.playerMinY)
+				transform.position = nextPos;
 		}
     }
 
