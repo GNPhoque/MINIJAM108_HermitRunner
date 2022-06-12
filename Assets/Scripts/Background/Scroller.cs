@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Scroller : MonoBehaviour
 {
 	[SerializeField]
-	Transform nextBackgroundPosition;
+	protected Transform nextBackgroundPosition;
 	new Transform transform;
 
 	protected virtual void Start()
