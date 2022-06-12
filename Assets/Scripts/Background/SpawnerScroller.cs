@@ -5,12 +5,12 @@ using UnityEngine;
 public class SpawnerScroller : Scroller
 {
 	[SerializeField]
-	GameObject enemies;
+	GameObject[] enemies;
 
 	protected override void Start()
 	{
 		base.Start();
-		Instantiate(enemies, transform.position, Quaternion.identity, transform);
+		Instantiate(SelectRandomEnemyPreset(), transform.position, Quaternion.identity, transform);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -18,7 +18,12 @@ public class SpawnerScroller : Scroller
 		if (collision.CompareTag("Player"))
 		{
 			transform.position += Vector3.right * 21.4f;
-			Instantiate(enemies, transform.position, Quaternion.identity, transform); 
+			Instantiate(SelectRandomEnemyPreset(), transform.position, Quaternion.identity, transform); 
 		}
+	}
+	
+	GameObject SelectRandomEnemyPreset()
+	{
+		return enemies[Random.Range(0, enemies.Length)];
 	}
 }
