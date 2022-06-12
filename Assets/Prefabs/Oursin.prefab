@@ -155,7 +155,6 @@ MonoBehaviour:
   numberOfSpikes: 8
   numberOfWaves: 1
   spike: {fileID: 517651364630071858, guid: 681bbc14814f43743bc73e2d05b435d7, type: 3}
-  distanceFromCenter: 0.5
   distanceBeforeShoot: 7
   attackCooldown: 2
 --- !u!114 &6337117109661001991
@@ -171,9 +170,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderRadius: 0
+  timeBeforeDestroy: 0
   mask:
     serializedVersion: 2
     m_Bits: 3008
+  collider: {fileID: 8789796498987314465}
 --- !u!1 &7902327868438052923
 GameObject:
   m_ObjectHideFlags: 0

@@ -76,9 +76,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderRadius: 0.5
+  timeBeforeDestroy: 0
   mask:
     serializedVersion: 2
     m_Bits: 896
+  collider: {fileID: 7733414100643514164}
   defenseDuration: 2
   shellDuration: 500
   noShellColliderOffset: {x: 0, y: 0.11}

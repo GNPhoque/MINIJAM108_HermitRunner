@@ -47,9 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderRadius: 0.15
+  timeBeforeDestroy: 0
   mask:
     serializedVersion: 2
     m_Bits: 3008
+  collider: {fileID: 2282039512334615429}
 --- !u!1 &4979205667774244775
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +134,7 @@ SpriteRenderer:
   m_Size: {x: 0.22222222, y: 0.1388889}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &8937434472229053728

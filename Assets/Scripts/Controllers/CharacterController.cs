@@ -9,7 +9,11 @@ public abstract class CharacterController : MonoBehaviour
 	[SerializeField]
 	protected float colliderRadius;
 	[SerializeField]
+	protected float timeBeforeDestroy;
+	[SerializeField]
 	protected LayerMask mask;
+	[SerializeField]
+	new Collider2D collider;
 
 	protected Animator animator;
 	protected bool isDigging;
@@ -20,6 +24,7 @@ public abstract class CharacterController : MonoBehaviour
 	public bool HasShell { get => hasShell; set { hasShell = value; animator.SetBool("HasShell", value); HasShellChanged?.Invoke(value); } }
 
 	public event Action<bool> HasShellChanged;
+	public event Action OnDeath;
 
 	void OnDrawGizmosSelected()
 	{
@@ -33,7 +38,7 @@ public abstract class CharacterController : MonoBehaviour
 		logDamage = true;
 		Debug.DrawLine(transform.position, transform.position + Vector3.right * colliderRadius, Color.red);
 		Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, colliderRadius, mask);
-		Collider2D collided = col.FirstOrDefault(x => x.gameObject != gameObject);
+		Collider2D collided = col.FirstOrDefault(x => x != collider);
 		if (collided)
 		{
 			CharacterController controller = collided?.GetComponent<CharacterController>();
@@ -60,7 +65,8 @@ public abstract class CharacterController : MonoBehaviour
 		{
 			//Debug.Break();
 		}
-		Destroy(gameObject);
+		OnDeath?.Invoke();
+		Destroy(gameObject, timeBeforeDestroy);
 	}
 
 	public void TakeDamage(int layer)

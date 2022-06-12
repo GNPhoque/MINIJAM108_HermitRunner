@@ -47,9 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderRadius: 0
+  timeBeforeDestroy: 0
   mask:
     serializedVersion: 2
     m_Bits: 3008
+  collider: {fileID: 4400145686487698743}
 --- !u!1 &2972764138593771565
 GameObject:
   m_ObjectHideFlags: 0

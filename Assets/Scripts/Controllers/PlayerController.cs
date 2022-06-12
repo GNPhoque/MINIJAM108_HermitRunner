@@ -55,6 +55,12 @@ public class PlayerController : CharacterController
 		inputs.Crab.Enable();
 
 		HasShellChanged += UpdateShellCollider;
+		//OnDeath += PlayerController_OnDeath;
+	}
+
+	private void PlayerController_OnDeath()
+	{
+		animator.SetBool("Death", true);
 	}
 
 	private void OnDisable()
@@ -67,6 +73,7 @@ public class PlayerController : CharacterController
 		inputs.Crab.Disable();
 
 		HasShellChanged -= UpdateShellCollider;
+		//OnDeath -= PlayerController_OnDeath;
 	}
 
 	private void OnDestroy()
