@@ -26,9 +26,9 @@ public class ai_ShootStar : MonoBehaviour
     void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        animator.SetTrigger("Burst");
         player = GameObject.Find("Player");
         attackcurrentCooldown = attackCooldown;
+        //animator.SetTrigger("Burst");
     }
 
     // Update is called once per frame
