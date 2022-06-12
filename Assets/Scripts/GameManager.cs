@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
 
 	public static GameManager instance;
 
+	public audioManager audioManager;
+
+	public AudioSource audioSource;
+
 	public float ScrollSpeed { get => _scrollSpeed; set { _scrollSpeed = value; UpdateScrollSpeed(); } }
 
 	private void OnValidate()
@@ -25,6 +29,14 @@ public class GameManager : MonoBehaviour
 		ScrollSpeed = _scrollSpeed;
 		UpdateScrollSpeed();
 	}
+
+	private void Awake()
+	{
+		audioManager = GetComponentInChildren<audioManager>();
+		audioSource = GetComponentInChildren<AudioSource>();
+
+	}
+
 
 	private void Start()
 	{

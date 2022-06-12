@@ -248,6 +248,10 @@ public class PlayerController : CharacterController
 			StopCoroutine(shellCoroutine);
 		}
 		HasShell = true;
+		AudioClip[] clips = GameManager.instance.audioManager.pickupShell;
+		AudioClip clip = clips[Random.Range(0, clips.Length)];
+		GameManager.instance.audioSource.PlayOneShot(clip);
+
 		shellCoroutine = StartCoroutine(StopShell());
 	}
 

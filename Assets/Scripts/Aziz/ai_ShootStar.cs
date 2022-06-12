@@ -67,6 +67,11 @@ public class ai_ShootStar : MonoBehaviour
             Instantiate(spike, spawnPos, Quaternion.Euler(0,0, spawnAngle), transform);
         }
 
+        AudioClip[] clips = GameManager.instance.audioManager.ursinFiring;
+        AudioClip clip = clips[Random.Range(0, clips.Length)];
+        GameManager.instance.audioSource.PlayOneShot(clip);
+
+
         /*
         Vector2 playerDirection = player.transform.position - transform.position;
         Quaternion playerDirectionAngle = Quaternion.LookRotation(playerDirection);

@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class audioManager : MonoBehaviour
 {
-    [SerializeField] AudioMixer audioMixer;
-    [SerializeField] AudioClip themeMusic;
-    [SerializeField] AudioClip walkingStep;
-    [SerializeField] AudioClip[] ursinFiring;
-    [SerializeField] AudioClip beachEnvironment;
-    [SerializeField] AudioClip sharkDies;
-    [SerializeField] AudioClip[] sharkAttack;
-    [SerializeField] AudioClip[] scoreItem;
-    [SerializeField] AudioClip[] pickupShell;
-    [SerializeField] AudioClip laserBeam;
-    [SerializeField] AudioClip onLoss;
+    [SerializeField] public AudioMixer audioMixer;
+    [SerializeField] public AudioClip themeMusic;
+    [SerializeField] public AudioClip walkingStep;
+    [SerializeField] public AudioClip[] ursinFiring;
+    [SerializeField] public AudioClip beachEnvironment;
+    [SerializeField] public AudioClip sharkDies;
+    [SerializeField] public AudioClip[] sharkAttack;
+    [SerializeField] public AudioClip[] scoreItem;
+    [SerializeField] public AudioClip[] pickupShell;
+    [SerializeField] public AudioClip laserBeam;
+    [SerializeField] public AudioClip onLoss;
 
 
     float musicVolume;
