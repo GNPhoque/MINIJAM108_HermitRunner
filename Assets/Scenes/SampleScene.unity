@@ -2858,6 +2858,18 @@ PrefabInstance:
       propertyPath: lazerLength
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7733414100643514162, guid: 58e07c98234e16d409ec060f982004c6, type: 3}
+      propertyPath: lazerCooldown
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733414100643514162, guid: 58e07c98234e16d409ec060f982004c6, type: 3}
+      propertyPath: shellDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7733414100643514162, guid: 58e07c98234e16d409ec060f982004c6, type: 3}
+      propertyPath: defenseCooldown
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58e07c98234e16d409ec060f982004c6, type: 3}
 --- !u!1 &7733414100643514174 stripped

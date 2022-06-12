@@ -10,9 +10,13 @@ public class PlayerController : CharacterController
 	[SerializeField]
 	float defenseDuration;
 	[SerializeField]
+	float defenseCooldown;
+	[SerializeField]
 	public float shellDuration;
 	[SerializeField]
 	public float lazerLength;
+	[SerializeField]
+	float lazerCooldown;
 	[SerializeField]
 	Vector2 noShellColliderOffset;
 	[SerializeField]
@@ -33,6 +37,7 @@ public class PlayerController : CharacterController
 	Coroutine shellCoroutine;
 	bool lazerReady = true;
 	bool shootingLazer;
+	bool defenseReady = true;
 	AudioSource myAudio;
 
 	#endregion
@@ -134,7 +139,7 @@ public class PlayerController : CharacterController
 	private void Defense_performed(InputAction.CallbackContext obj)
 	{
 
-		if (isDefending) return;
+		if (isDefending || defenseReady==false) return;
 		//Debug.Log("DEFENSE");
 		float oldSpeed = GameManager.instance.ScrollSpeed;
 		GameManager.instance.UpdateScrollSpeed(0f);
@@ -196,7 +201,7 @@ public class PlayerController : CharacterController
 		lazer.SetActive(false);
 		shootingLazer = false;
 		CinemachineShake.Instance.ShakeCamera(4, false);
-		yield return new WaitForSeconds(0f);
+		yield return new WaitForSeconds(lazerCooldown);
 		lazerReady = true;
 	}
 
@@ -248,7 +253,10 @@ public class PlayerController : CharacterController
 		yield return new WaitForSeconds(defenseDuration);
 		GameManager.instance.UpdateScrollSpeed(oldSpeed);
 		isDefending = false;
+		defenseReady = false;
 		myAudio.Play();
+		yield return new WaitForSeconds(defenseCooldown);
+		defenseReady = true;
 	}
 
 	public void EquipShell()
