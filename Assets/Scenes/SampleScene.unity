@@ -2759,7 +2759,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6857508429915162621, guid: 1fec7775b921ae94c8f39855f50294a9, type: 3}
       propertyPath: m_Name
-      value: ProgressBarLaser
+      value: ProgressBarShell
       objectReference: {fileID: 0}
     - target: {fileID: 6857508429915162622, guid: 1fec7775b921ae94c8f39855f50294a9, type: 3}
       propertyPath: m_Pivot.x
