@@ -7,56 +7,67 @@ public class ShellBar : MonoBehaviour
 {
 
     [SerializeField] GameObject player;
-    //[SerializeField] Image mask;
     [SerializeField] Image fill;
 
+    PlayerController playerController;
     Slider slider;
     float barDurationLeft;
-    float initialBarDuration;
+    [SerializeField] float initialBarDuration;
     float currentFill;
     bool hasShell;
 
     void Awake()
     {
         slider = GetComponent<Slider>();
+        playerController = player.GetComponent<PlayerController>();
+        initialBarDuration = playerController.shellDuration;
+    }
+
+    private void OnEnable()
+	{
+		playerController.HasShellChanged += PlayerController_HasShellChanged;
+	}
+	private void OnDisable()
+	{
+		playerController.HasShellChanged -= PlayerController_HasShellChanged;
+    }
+
+    private void PlayerController_HasShellChanged(bool obj)
+	{
+        hasShell = obj;
+		if (!obj)
+		{
+            fill.color = Color.black;
+            barDurationLeft = initialBarDuration;
+        }
+		else
+		{
+            barDurationLeft = initialBarDuration;
+		}
     }
 
     void Update()
     {
         if (!player) return;
-        initialBarDuration = player.GetComponent<PlayerController>().shellDuration;
-        hasShell = player.GetComponent<PlayerController>().HasShell;
 
-        if(hasShell)
+        if (hasShell)
         {
             barDurationLeft -= Time.deltaTime;
-        }
 
-
-
-        if(currentFill < 0.25f)
-        {
-            fill.color = Color.red;
+            if (currentFill < 0.25f)
+            {
+                fill.color = Color.red;
+            }
+            else if (currentFill < 0.5f)
+            {
+                fill.color = new Vector4(255, 165, 0, 1);
+            }
+            else
+            {
+                fill.color = Color.cyan;
+            }
         }
-        else if(currentFill <0.5f)
-        {
-            fill.color = new Vector4(255, 165, 0, 1);
-        }
-        else
-        {
-            fill.color = Color.cyan;
-        }
-
-        if(!hasShell)
-        {
-            fill.color = Color.black;
-            barDurationLeft = initialBarDuration;
-        }
-
-        if (initialBarDuration != 0)
-        {
-            currentFill = barDurationLeft / initialBarDuration;
-            slider.value = currentFill;
-        }
+        currentFill = barDurationLeft / initialBarDuration;
+        slider.value = currentFill;
     }
 }
