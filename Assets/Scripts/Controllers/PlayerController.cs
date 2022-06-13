@@ -16,7 +16,7 @@ public class PlayerController : CharacterController
 	[SerializeField]
 	public float lazerLength;
 	[SerializeField]
-	float lazerCooldown;
+	public float lazerCooldown;
 	[SerializeField]
 	Vector2 noShellColliderOffset;
 	[SerializeField]
@@ -35,7 +35,7 @@ public class PlayerController : CharacterController
 	Vector3 oldPosition;
 	Vector3 oldMousePosition;
 	Coroutine shellCoroutine;
-	bool lazerReady = true;
+	public bool lazerReady = true;
 	bool shootingLazer;
 	bool defenseReady = true;
 	AudioSource myAudio;
