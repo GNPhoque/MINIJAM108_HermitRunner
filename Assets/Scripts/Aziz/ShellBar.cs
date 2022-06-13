@@ -7,8 +7,10 @@ public class ShellBar : MonoBehaviour
 {
 
     [SerializeField] GameObject player;
-    [SerializeField] Image mask;
+    //[SerializeField] Image mask;
     [SerializeField] Image fill;
+
+    Slider slider;
     float barDurationLeft;
     float initialBarDuration;
     float currentFill;
@@ -16,7 +18,7 @@ public class ShellBar : MonoBehaviour
 
     void Awake()
     {
-        
+        slider = GetComponent<Slider>();
     }
 
     void Update()
@@ -30,11 +32,7 @@ public class ShellBar : MonoBehaviour
             barDurationLeft -= Time.deltaTime;
         }
 
-        if (initialBarDuration != 0)
-        {
-            currentFill = barDurationLeft / initialBarDuration;
-            mask.fillAmount = currentFill;
-        }
+
 
         if(currentFill < 0.25f)
         {
@@ -53,6 +51,12 @@ public class ShellBar : MonoBehaviour
         {
             fill.color = Color.black;
             barDurationLeft = initialBarDuration;
+        }
+
+        if (initialBarDuration != 0)
+        {
+            currentFill = barDurationLeft / initialBarDuration;
+            slider.value = currentFill;
         }
     }
 }
