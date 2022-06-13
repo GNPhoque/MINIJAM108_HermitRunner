@@ -28,7 +28,7 @@ public class audioManager : MonoBehaviour
         Debug.Log(muted);
         if(muted)
         {
-            audioMixer.SetFloat(MIXER_MUSIC, 0);
+            audioMixer.SetFloat(MIXER_MUSIC, -15);
         }
         if(!muted)
         {
