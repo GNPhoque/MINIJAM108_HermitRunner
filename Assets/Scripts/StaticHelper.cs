@@ -8,4 +8,6 @@ public static class StaticHelper
 	public static float scrollSpeed;
 	public static float score;
 	public static float highscore;
+	public static float musicVolume;
+	public static bool musicOn = true;
 }

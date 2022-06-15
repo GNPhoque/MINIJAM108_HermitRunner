@@ -16,6 +16,8 @@ public class audioManager : MonoBehaviour
     [SerializeField] public AudioClip[] pickupShell;
     [SerializeField] public AudioClip laserBeam;
     [SerializeField] public AudioClip onLoss;
+    [SerializeField] public Toggle muteToggle;
+    [SerializeField] public bool isMusic;
 
 
     float musicVolume;
@@ -23,16 +25,22 @@ public class audioManager : MonoBehaviour
 
     const string MIXER_MUSIC = "MusicVolume";
 
-    public void MuteMusicToggle(bool muted)
+	private void Start()
+	{
+        if(isMusic)
+		{
+            muteToggle.isOn = StaticHelper.musicOn;
+            Debug.Log(StaticHelper.musicOn);
+		}
+    }
+
+    public void MuteMusicToggle(bool soundOn)
     {
-        Debug.Log(muted);
-        if(muted)
-        {
-            audioMixer.SetFloat(MIXER_MUSIC, -15);
-        }
-        if(!muted)
-        {
-            audioMixer.SetFloat(MIXER_MUSIC, -80);
-        }
+        if (soundOn)
+            StaticHelper.musicVolume = -15f;
+        else
+            StaticHelper.musicVolume = -80f;
+        StaticHelper.musicOn = soundOn;
+        audioMixer.SetFloat(MIXER_MUSIC, StaticHelper.musicVolume);
     }
 }

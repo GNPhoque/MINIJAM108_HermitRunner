@@ -19,7 +19,13 @@ public class dirtyManager : MonoBehaviour
         inputManager.MainMenu.Enable();
     }
 
-    public void LoadNextScene(InputAction.CallbackContext obj)
+	private void OnDisable()
+	{
+        inputManager.MainMenu.Next.performed -= LoadNextScene;
+        inputManager.MainMenu.Disable();
+    }
+
+	public void LoadNextScene(InputAction.CallbackContext obj)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }

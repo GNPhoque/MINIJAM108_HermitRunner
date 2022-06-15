@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderRadius: 0.15
-  timeBeforeDestroy: 0
+  timeBeforeDestroy: 0.1
   mask:
     serializedVersion: 2
     m_Bits: 2496
@@ -126,7 +126,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1951828951, guid: c59b312278504a84d8a8a72aebcd5c0e, type: 3}
+  m_Sprite: {fileID: 4482222895241928292, guid: c59b312278504a84d8a8a72aebcd5c0e, type: 3}
   m_Color: {r: 0.4433962, g: 0.24190016, b: 0.085751146, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,7 +134,7 @@ SpriteRenderer:
   m_Size: {x: 0.22222222, y: 0.1388889}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &8937434472229053728

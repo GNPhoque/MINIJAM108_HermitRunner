@@ -8,9 +8,5 @@ public class ProjectileController : CharacterController
 	{
 		Destroy(gameObject, 3f);
 	}
-	private void Update()
-	{
-		CheckCollisions(mask);
-	}
 
 }

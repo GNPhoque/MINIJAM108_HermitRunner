@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -73,7 +74,7 @@ public class PlayerController : CharacterController
 		inputs.Crab.Enable();
 
 		HasShellChanged += UpdateShellCollider;
-		//OnDeath += PlayerController_OnDeath;
+		OnDeath += PlayerController_OnDeath;
 	}
 
 	private void OnDisable()
@@ -86,17 +87,12 @@ public class PlayerController : CharacterController
 		inputs.Crab.Disable();
 
 		HasShellChanged -= UpdateShellCollider;
-		//OnDeath -= PlayerController_OnDeath;
+		OnDeath -= PlayerController_OnDeath;
 	}
 
-	private void OnDestroy()
+	protected override void Update()
 	{
-		GameManager.instance.LoseGame();
-	}
-
-	private void Update()
-	{
-		CheckCollisions(mask);
+		base.Update();
 		if (lazer.activeSelf)
 		{
 			Vector3 pos = (GetMousePosition() - transform.position).normalized;
@@ -282,6 +278,7 @@ public class PlayerController : CharacterController
 
 	private void PlayerController_OnDeath()
 	{
-		animator.SetBool("Death", true);
+		//animator.SetBool("Death", true);
+		GameManager.instance.LoseGame();
 	}
 }

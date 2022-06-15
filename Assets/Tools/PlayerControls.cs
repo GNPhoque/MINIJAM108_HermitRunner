@@ -108,6 +108,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6147c32-d58c-469d-a0b6-e6b2404ec901"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -308,6 +317,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""354c01e9-7c0a-4cce-837a-937cefe6b4ff"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -353,6 +373,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Crab_Shoot = m_Crab.FindAction("Shoot", throwIfNotFound: true);
         m_Crab_Dig = m_Crab.FindAction("Dig", throwIfNotFound: true);
         m_Crab_MousePosition = m_Crab.FindAction("MousePosition", throwIfNotFound: true);
+        m_Crab_Restart = m_Crab.FindAction("Restart", throwIfNotFound: true);
         // MainMenu
         m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
         m_MainMenu_Next = m_MainMenu.FindAction("Next", throwIfNotFound: true);
@@ -454,6 +475,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Crab_Shoot;
     private readonly InputAction m_Crab_Dig;
     private readonly InputAction m_Crab_MousePosition;
+    private readonly InputAction m_Crab_Restart;
     public struct CrabActions
     {
         private @PlayerControls m_Wrapper;
@@ -464,6 +486,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Crab_Shoot;
         public InputAction @Dig => m_Wrapper.m_Crab_Dig;
         public InputAction @MousePosition => m_Wrapper.m_Crab_MousePosition;
+        public InputAction @Restart => m_Wrapper.m_Crab_Restart;
         public InputActionMap Get() { return m_Wrapper.m_Crab; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -491,6 +514,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MousePosition.started -= m_Wrapper.m_CrabActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_CrabActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_CrabActionsCallbackInterface.OnMousePosition;
+                @Restart.started -= m_Wrapper.m_CrabActionsCallbackInterface.OnRestart;
+                @Restart.performed -= m_Wrapper.m_CrabActionsCallbackInterface.OnRestart;
+                @Restart.canceled -= m_Wrapper.m_CrabActionsCallbackInterface.OnRestart;
             }
             m_Wrapper.m_CrabActionsCallbackInterface = instance;
             if (instance != null)
@@ -513,6 +539,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @Restart.started += instance.OnRestart;
+                @Restart.performed += instance.OnRestart;
+                @Restart.canceled += instance.OnRestart;
             }
         }
     }
@@ -562,6 +591,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnDig(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
     }
     public interface IMainMenuActions
     {

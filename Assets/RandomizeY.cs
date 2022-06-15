@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class RandomizeY : MonoBehaviour
 {
-    Transform[] enemies;
+    CharacterController[] enemies;
 
     void Awake()
     {
-        enemies = GetComponentsInChildren<Transform>();
-        foreach (Transform enemy in enemies)
+        enemies = GetComponentsInChildren<CharacterController>();
+        foreach (CharacterController enemy in enemies)
         {
-            if(enemy.GetComponent<ObstacleController>() == null)
+            if(enemy is ObstacleController)
             {
-                enemy.transform.position = new Vector2(enemy.transform.position.x, Random.Range(-2.5f, 3.5f));
+                continue;
             }
+            enemy.transform.position = new Vector2(enemy.transform.position.x, Random.Range(-2.5f, 3.5f));
         }
     }
 }

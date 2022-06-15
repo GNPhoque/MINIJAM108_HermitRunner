@@ -1363,6 +1363,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1dedfbf16d996c34db8d1de1cc768136, type: 3}
   laserBeam: {fileID: 8300000, guid: 6bf6ed2451f418c4082b7b7f52850671, type: 3}
   onLoss: {fileID: 8300000, guid: 73f12d0e603cef44abdd9dca68ede36e, type: 3}
+  muteToggle: {fileID: 471956573}
+  isMusic: 1
 --- !u!82 &2094892594
 AudioSource:
   m_ObjectHideFlags: 0

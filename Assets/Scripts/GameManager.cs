@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
 	[HideInInspector] public audioManager audioManager;
 
 	[HideInInspector] public AudioSource audioSource;
+	PlayerControls inputs;
+	bool lost;
+
 
 	public float ScrollSpeed { get => _scrollSpeed; set { _scrollSpeed = value; UpdateScrollSpeed(); } }
 
@@ -34,9 +37,20 @@ public class GameManager : MonoBehaviour
 	{
 		audioManager = GetComponentInChildren<audioManager>();
 		audioSource = GetComponentInChildren<AudioSource>();
-
+		inputs = new PlayerControls();
 	}
 
+	private void OnEnable()
+	{
+		inputs.Crab.Restart.performed += Restart_performed; ;
+		inputs.Crab.Enable();
+	}
+
+	private void OnDisable()
+	{
+		inputs.Crab.Restart.performed -= Restart_performed; ;
+		inputs.Crab.Disable();
+	}
 
 	private void Start()
 	{
@@ -53,6 +67,14 @@ public class GameManager : MonoBehaviour
 	//	Time.timeScale *= 1 + (Time.deltaTime / 100f);
 	//	//ScrollSpeed *= 1 + (Time.deltaTime / 100f);
 	//}
+
+	private void Restart_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	{
+		if (lost)
+		{
+			Restart();
+		}
+	}
 
 	[ContextMenu("UpdateScrollSpeed")]
 	void UpdateScrollSpeed()
@@ -74,6 +96,7 @@ public class GameManager : MonoBehaviour
 
 	public void LoseGame()
 	{
+		lost = true;
 		Time.timeScale = 0f;
 		losePanel.SetActive(true);
 		if (StaticHelper.score > StaticHelper.highscore) StaticHelper.highscore = StaticHelper.score;

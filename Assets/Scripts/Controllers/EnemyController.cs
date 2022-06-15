@@ -5,8 +5,4 @@ using UnityEngine;
 public class EnemyController : CharacterController
 {
 
-	private void Update()
-	{
-		CheckCollisions(mask);
-	}
 }

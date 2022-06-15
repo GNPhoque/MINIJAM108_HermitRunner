@@ -12,14 +12,8 @@ public class ObstacleController : CharacterController
 		boxCollider = GetComponentInChildren<BoxCollider2D>();
 	}
 
-	private void Update()
-	{
-		CheckCollisions(mask);
-	}
-
 	public override void CheckCollisions(LayerMask mask)
 	{
-		Debug.DrawLine(transform.position, transform.position + Vector3.right * colliderRadius, Color.red);
 		Collider2D[] col = new Collider2D[1];
 		Physics2D.OverlapCollider(boxCollider, new ContactFilter2D() { layerMask = mask, useLayerMask = true }, col);
 		Collider2D collided = col.FirstOrDefault();
